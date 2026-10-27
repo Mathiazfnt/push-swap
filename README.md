@@ -4,8 +4,7 @@
 
 ```text
 push-swap/
-├── checker/                 # Fonctions qui rejouent les instructions et valident le tri
-│   └── cmd/                  # Point d'entrée du programme checker
+├── checker/                 # Programme qui rejoue les instructions et valide le tri
 ├── entiers/                 # Conversion des arguments en liste d'entiers
 ├── instructions/
 │   ├── echanger/            # sa, sb, ss
@@ -25,8 +24,7 @@ push-swap/
 - `instructions/pousser` : déplace le sommet d'une pile vers l'autre.
 - `instructions/rotation_haut` : place le sommet d'une pile en bas.
 - `instructions/rotation_bas` : place le dernier élément d'une pile au sommet.
-- `checker` : fournit les fonctions qui appliquent les instructions et vérifient le tri.
-- `checker/cmd` : point d'entrée du programme checker.
+- `checker` : lit les arguments et les instructions, applique les opérations, puis vérifie que A est triée et B vide.
 - `push-swap` : point d'entrée du programme qui devra produire les instructions de tri.
 
 Les deux programmes sont distincts : chacun initialise ses propres piles au démarrage. Dans un même programme, toutes les opérations utilisent les mêmes variables `piles.A` et `piles.B`.

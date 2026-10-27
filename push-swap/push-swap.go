@@ -1,51 +1,32 @@
 package main
 
 import (
-	"fmt"
-
-	"push-swap/checker"
-	"push-swap/instructions/echanger"
-	"push-swap/instructions/rotation_bas"
-	"push-swap/instructions/rotation_haut"
+	"push-swap/push-swap/gestion_cas"
 )
 
 func Push_swap(a []int, b []int) {
-	if checker.EstTriee(a) {
+	if len(b) != 0 {
 		return
-	}
-	if len(a) == 2 {
-		cas_2(a, b)
+	} else if EstTriee(a) {
+		return
+	} else if len(a) == 2 {
+		gestion_cas.Cas2(a, b)
 		return
 	} else if len(a) == 3 {
-		cas_3(a, b)
+		gestion_cas.Cas3(a, b)
 		return
+	} else if len(a) <= 5 {
+		gestion_cas.Cas5(a, b)
+	}else{
+		gestion_cas.Cas_100(a, b)
 	}
 }
 
-func cas_2(a []int, b []int) {
-	if a[0] > a[1] {
-		echanger.Sa()
-		fmt.Println("sa")
-	}
-}
-
-func cas_3(a []int, b []int) { 
-	max := a[0]
-	for _, elt := range a {
-		if max < elt {
-			max = elt
+func EstTriee(a []int) bool {
+	for i := 1; i < len(a); i++ {
+		if a[i-1] > a[i] {
+			return false
 		}
 	}
-
-	if max == a[0] {
-		rotation_haut.Ra()
-		fmt.Println("ra")
-	} else if max == a[1] {
-		rotation_bas.Rra()
-		fmt.Println("rra")
-	}
-	if a[0] > a[1] {
-		echanger.Sa()
-		fmt.Println("sa")
-	}
+	return true
 }

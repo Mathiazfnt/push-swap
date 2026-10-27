@@ -1,4 +1,4 @@
-package checker
+package main
 
 func Verifier(tab []string) bool {
 	instructions := []string{

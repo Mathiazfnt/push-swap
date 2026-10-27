@@ -13,7 +13,6 @@ import (
 	"bufio"
 	"fmt"
 	"os"
-	"push-swap/checker"
 	"push-swap/entiers"
 	"strings"
 )
@@ -43,12 +42,12 @@ func main() {
 	}
 
 	// ICI : vérifier que toutes les instructions sont connues
-	if !checker.Verifier(instructions) {
+	if !Verifier(instructions) {
 		fmt.Fprintln(os.Stderr, "Error")
 		os.Exit(1)
 	}
 
-	if checker.Checker(nombres, instructions) {
+	if Checker(nombres, instructions) {
 		print("OK")
 	} else {
 		print("KO")
