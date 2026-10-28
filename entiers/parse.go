@@ -8,6 +8,11 @@ import (
 
 func Parse(args []string) ([]int, error) {
 	// "3 2 1 0" ou 3 2 1 0 -> ["3","2","1","0"]
+	for _, arg := range args {
+		if strings.TrimSpace(arg) == "" {
+			return nil, errors.New("empty argument")
+		}
+	}
 	tab := strings.Fields(strings.Join(args, " "))
 
 	entiers := make([]int, 0, len(tab))

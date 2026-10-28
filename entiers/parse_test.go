@@ -1,7 +1,6 @@
 package entiers
 
 import (
-	"reflect"
 	"testing"
 )
 
@@ -28,6 +27,16 @@ func TestParse(t *testing.T) {
 			want: []int{},
 		},
 		{
+			name:    "whitespace-only argument",
+			args:    []string{"   "},
+			wantErr: true,
+		},
+		{
+			name:    "empty argument between values",
+			args:    []string{"3", "", "2"},
+			wantErr: true,
+		},
+		{
 			name:    "non-integer",
 			args:    []string{"3", "abc"},
 			wantErr: true,
@@ -48,9 +57,21 @@ func TestParse(t *testing.T) {
 			if tt.wantErr {
 				return
 			}
-			if !reflect.DeepEqual(got, tt.want) {
+			if !equalInts(got, tt.want) {
 				t.Errorf("Parse(%v) = %v, want %v", tt.args, got, tt.want)
 			}
 		})
 	}
+}
+
+func equalInts(got, want []int) bool {
+	if len(got) != len(want) {
+		return false
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			return false
+		}
+	}
+	return true
 }

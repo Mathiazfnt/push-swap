@@ -1,7 +1,6 @@
 package pousser
 
 import (
-	"reflect"
 	"testing"
 
 	"push-swap/piles"
@@ -14,11 +13,11 @@ func TestPa(t *testing.T) {
 	Pa()
 
 	wantA := []int{3, 1, 2}
-	if !reflect.DeepEqual(piles.A, wantA) {
+	if !equalInts(piles.A, wantA) {
 		t.Errorf("Pa() pile A = %v, want %v", piles.A, wantA)
 	}
 	wantB := []int{4}
-	if !reflect.DeepEqual(piles.B, wantB) {
+	if !equalInts(piles.B, wantB) {
 		t.Errorf("Pa() pile B = %v, want %v", piles.B, wantB)
 	}
 }
@@ -30,11 +29,11 @@ func TestPaWithEmptyB(t *testing.T) {
 	Pa()
 
 	wantA := []int{1, 2}
-	if !reflect.DeepEqual(piles.A, wantA) {
+	if !equalInts(piles.A, wantA) {
 		t.Errorf("Pa() pile A = %v, want %v", piles.A, wantA)
 	}
 	wantB := []int{}
-	if !reflect.DeepEqual(piles.B, wantB) {
+	if !equalInts(piles.B, wantB) {
 		t.Errorf("Pa() pile B = %v, want %v", piles.B, wantB)
 	}
 }
@@ -46,11 +45,11 @@ func TestPb(t *testing.T) {
 	Pb()
 
 	wantA := []int{2}
-	if !reflect.DeepEqual(piles.A, wantA) {
+	if !equalInts(piles.A, wantA) {
 		t.Errorf("Pb() pile A = %v, want %v", piles.A, wantA)
 	}
 	wantB := []int{1, 3, 4}
-	if !reflect.DeepEqual(piles.B, wantB) {
+	if !equalInts(piles.B, wantB) {
 		t.Errorf("Pb() pile B = %v, want %v", piles.B, wantB)
 	}
 }
@@ -62,11 +61,23 @@ func TestPbWithEmptyA(t *testing.T) {
 	Pb()
 
 	wantA := []int{}
-	if !reflect.DeepEqual(piles.A, wantA) {
+	if !equalInts(piles.A, wantA) {
 		t.Errorf("Pb() pile A = %v, want %v", piles.A, wantA)
 	}
 	wantB := []int{3, 4}
-	if !reflect.DeepEqual(piles.B, wantB) {
+	if !equalInts(piles.B, wantB) {
 		t.Errorf("Pb() pile B = %v, want %v", piles.B, wantB)
 	}
+}
+
+func equalInts(got, want []int) bool {
+	if len(got) != len(want) {
+		return false
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			return false
+		}
+	}
+	return true
 }

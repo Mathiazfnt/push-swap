@@ -13,8 +13,8 @@ import (
 	"bufio"
 	"fmt"
 	"os"
+	checkerlogic "push-swap/checker/logic"
 	"push-swap/entiers"
-	"strings"
 )
 
 func main() {
@@ -34,22 +34,21 @@ func main() {
 	var instructions []string
 	scanner := bufio.NewScanner(os.Stdin)
 	for scanner.Scan() {
-		ligne := strings.TrimSpace(scanner.Text())
-		if ligne == "" {
-			continue
-		}
-		instructions = append(instructions, ligne)
+		instructions = append(instructions, scanner.Text())
 	}
-
-	// ICI : vérifier que toutes les instructions sont connues
-	if !Verifier(instructions) {
+	if err := scanner.Err(); err != nil {
 		fmt.Fprintln(os.Stderr, "Error")
 		os.Exit(1)
 	}
 
-	if Checker(nombres, instructions) {
-		print("OK")
+	if !checkerlogic.IsValidInstructionSequence(instructions) {
+		fmt.Fprintln(os.Stderr, "Error")
+		os.Exit(1)
+	}
+
+	if checkerlogic.Check(nombres, instructions) {
+		fmt.Println("OK")
 	} else {
-		print("KO")
+		fmt.Println("KO")
 	}
 }

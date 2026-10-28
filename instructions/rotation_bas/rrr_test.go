@@ -1,7 +1,6 @@
 package rotation_bas
 
 import (
-	"reflect"
 	"testing"
 
 	"push-swap/piles"
@@ -15,10 +14,10 @@ func TestRrr(t *testing.T) {
 
 	wantA := []int{3, 1, 2}
 	wantB := []int{6, 4, 5}
-	if !reflect.DeepEqual(piles.A, wantA) {
+	if !equalInts(piles.A, wantA) {
 		t.Errorf("Rrr() pile A = %v, want %v", piles.A, wantA)
 	}
-	if !reflect.DeepEqual(piles.B, wantB) {
+	if !equalInts(piles.B, wantB) {
 		t.Errorf("Rrr() pile B = %v, want %v", piles.B, wantB)
 	}
 }
@@ -68,12 +67,24 @@ func TestRrrWithFewerThanTwoElements(t *testing.T) {
 
 			Rrr()
 
-			if !reflect.DeepEqual(piles.A, tt.wantA) {
+			if !equalInts(piles.A, tt.wantA) {
 				t.Errorf("Rrr() pile A = %v, want %v", piles.A, tt.wantA)
 			}
-			if !reflect.DeepEqual(piles.B, tt.wantB) {
+			if !equalInts(piles.B, tt.wantB) {
 				t.Errorf("Rrr() pile B = %v, want %v", piles.B, tt.wantB)
 			}
 		})
 	}
+}
+
+func equalInts(got, want []int) bool {
+	if len(got) != len(want) {
+		return false
+	}
+	for i := range got {
+		if got[i] != want[i] {
+			return false
+		}
+	}
+	return true
 }

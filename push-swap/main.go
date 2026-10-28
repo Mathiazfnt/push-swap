@@ -14,6 +14,7 @@ import (
 	"os"
 	"push-swap/entiers"
 	"push-swap/piles"
+	"push-swap/push-swap/logic"
 )
 
 func main() {
@@ -29,8 +30,8 @@ func main() {
 		os.Exit(1)
 	}
 
-	piles.A = append([]int(nil), nombres...)
+	piles.A = nombres
 	piles.B = nil
 
-	Push_swap(piles.GetA(), piles.GetB())
+	logic.PushSwap()
 }
